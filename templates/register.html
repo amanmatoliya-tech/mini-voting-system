@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration - Mini Voting</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #4c6ef5, #15aabf);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 1rem;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            color: white;
+            animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            color: white;
+            border-radius: 0.7rem;
+        }
+
+        .form-control::placeholder {
+            color: #e0e0e0;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: none;
+            border: 1px solid #fff;
+        }
+
+        .btn-custom {
+            background: #22c55e;
+            border: none;
+            padding: 0.7rem;
+            color: white;
+            width: 100%;
+            font-weight: 600;
+            border-radius: 0.7rem;
+            transition: 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background: #16a34a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        .title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .flash {
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .flash.success { color: #d4ffda; }
+        .flash.error { color: #ffbdbd; }
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #d0e7ff;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+
+                <div class="title">📝 Student Registration</div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for cat, msg in messages %}
+                            <div class="flash {{ cat }}">{{ msg }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+
+                    <div class="mb-3">
+                        <label class="form-label">College ID</label>
+                        <input type="text" name="college_id" class="form-control"
+                               placeholder="Enter your College ID" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control"
+                               placeholder="Enter password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" name="confirm" class="form-control"
+                               placeholder="Re-enter password" required>
+                    </div>
+
+                    <button type="submit" class="btn-custom mt-3">Register</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <small>Already have an account?
+                        <a href="{{ url_for('login') }}">Login here</a>
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

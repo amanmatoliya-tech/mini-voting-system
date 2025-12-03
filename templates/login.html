@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login - Mini Voting</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #4c6ef5, #15aabf);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: white;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 1rem;
+            padding: 2.2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            animation: fadeIn 0.7s ease;
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.8rem;
+            font-size: 1.9rem;
+        }
+
+        .form-control {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.7rem;
+            color: white;
+        }
+
+        .form-control::placeholder {
+            color: #e0e0e0;
+        }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.35);
+            box-shadow: none;
+            border: 1px solid #fff;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .btn-custom {
+            background: #22c55e;
+            border: none;
+            border-radius: 0.7rem;
+            padding: 0.8rem;
+            width: 100%;
+            font-size: 1.1rem;
+            color: white;
+            margin-top: 10px;
+            transition: 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background: #16a34a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        .flash {
+            padding: 12px;
+            border-radius: 0.7rem;
+            font-weight: 600;
+            animation: fadeIn 0.7s ease forwards;
+        }
+
+        .flash.success {
+            background-color: rgba(180, 255, 180, 0.3);
+            border-left: 4px solid #22c55e;
+            color: #d9ffd9;
+        }
+
+        .flash.error {
+            background-color: rgba(255, 150, 150, 0.3);
+            border-left: 4px solid #ff4d4d;
+            color: #ffe2e2;
+        }
+
+        a {
+            color: #d9ecff;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        @media(max-width: 480px) {
+            .glass-card { padding: 1.7rem; }
+            h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="glass-card">
+
+                <h2>🎓 Student Login</h2>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for cat, msg in messages %}
+                            <div class="flash {{ cat }}">{{ msg }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="college_id">College ID</label>
+                        <input type="text" name="college_id" id="college_id" class="form-control" placeholder="Enter your College ID" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn-custom">Login</button>
+
+                    <div class="text-center mt-3">
+                        <small>New student? <a href="{{ url_for('register') }}">Register here</a></small>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <small>Admin? <a href="{{ url_for('admin') }}">Login here</a></small>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
